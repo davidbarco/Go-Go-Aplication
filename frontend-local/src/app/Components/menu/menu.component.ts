@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LocalService } from '../../services/local.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  user;
+  apiURL: String;
+
+  constructor(
+    private userService: LocalService,
+    private router: Router
+  ) {
+    this.apiURL = this.userService.apiURL;
+    this.userService.authenticate$.subscribe(
+      userAuth => {
+
+        this.user = userAuth
+
+      }
+    )
+   }
 
   ngOnInit(): void {
+  }
+
+  destroySession() {
+    this.userService.removeToken();
+    this.router.navigate(['/login']);
+
   }
 
 }

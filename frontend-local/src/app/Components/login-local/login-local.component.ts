@@ -36,7 +36,7 @@ export class LoginLocalComponent implements OnInit {
         (userLogged) =>{
           this.userService.saveToken(userLogged['token']);
           
-          this.router.navigate(['local']);
+          this.router.navigate(['/local']);
           
         },(error) => {
           swal('Los datos no coinciden', "", 'error');

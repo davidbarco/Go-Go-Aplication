@@ -11,11 +11,13 @@ const swal = require('sweetalert');
   styleUrls: ['./create-local.component.css']
 })
 export class CreateLocalComponent implements OnInit {
-  userForm: FormGroup
+  
+    userForm: FormGroup
   constructor(
     private formBuilder: FormBuilder,
     private userService: LocalService,
     private route: Router,
+    
   ) {
     this.createValidator();
    }
@@ -51,6 +53,8 @@ export class CreateLocalComponent implements OnInit {
             swal('usuario ya existe', "", 'error');
           }else{
             swal('Registro Exítoso', "", 'success');
+            
+            
             this.route.navigate(['/login'])
           }
         },(error) => {

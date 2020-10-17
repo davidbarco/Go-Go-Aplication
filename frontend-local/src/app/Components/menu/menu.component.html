@@ -1,1 +1,22 @@
-<p>menu works!</p>
+<!-- As a link -->
+<nav class="navbar navbar-light menú" *ngIf="user">
+    <!-- Default dropup button -->
+<div class="btn-group  dropup hamburguesa">
+    <button type="button" class="fas fa-bars boton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    </button>
+    <div class="dropdown-menu">
+      
+      <!-- Dropdown menu links -->
+      <a href="home">Home</a>
+    </div>
+  </div>
+  
+  
+    
+
+    <li class="cerrar nav-item nav-link-item last" *ngIf="user">
+        
+        <a class="hover nav-link sombra-link  cerrar" (click)="destroySession()"><i class="fas fa-user usuario"></i> Cerrar sesión </a>
+    </li>
+    
+  </nav>

@@ -15,10 +15,10 @@ import { MapsComponent } from './Components/maps/maps.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: CreateLocalComponent },
-  { path: 'registrarLocal', canActivate: [AuthGuard], component: CreateLocalComponent },
-  { path: 'login', canActivate: [AuthGuard], component: LoginLocalComponent },
-  { path: 'local', canActivate: [AuthGuard], component: LocalAdminComponent },
+  { path: '', component: LocalAdminComponent },
+  { path: 'registrarLocal',  component: CreateLocalComponent },
+  { path: 'login',  component: LoginLocalComponent },
+  { path: 'local',canActivate: [AuthGuard],  component: LocalAdminComponent },
   { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
   { path: '**', component: CreateLocalComponent }//Ruta para cuando no encontramos una página
 ]

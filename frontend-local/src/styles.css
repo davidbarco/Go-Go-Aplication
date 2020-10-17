@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+.anchoRegistrarse{
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+    width: 100%;
+    background-color: rgb(202, 126, 27)!important;
+    border-radius: 50px;
+    font-size: 12px;
+}
+.btnregresar{
+    width: 52%;
+    background-color: rgb(202, 126, 27)!important;
+    border-radius: 50px;
+    font-size: 12px;
+}
+.iniciar{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.redes{
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+}
+.face{
+    color: rgb(202, 126, 27);
+    font-size: 22px;
+}
