@@ -1,0 +1,8 @@
+backend-local/node_modules
+frontend-local/node_modules
+frontend-local/package-lock.json
+backend-local/package-lock.json
+backend-user/node_modules
+frontend-user/node_modules
+backend-user/package-lock.json
+frontend-user/package-lock.json
