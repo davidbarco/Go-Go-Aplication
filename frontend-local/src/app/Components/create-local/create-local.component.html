@@ -1,0 +1,75 @@
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="row  col-12 col-sm-8 col-md-8 col-lg-8 col-xl-5 justify-content-center flex-column align-items-center">
+        <h1 class="titulo-login"> Registrar Local</h1>
+        <form class="formulario" [formGroup]="userForm" (ngSubmit)="registerUser()">
+            <div class="form-group">
+                <label for="name"></label>
+                <input id="name" name="name" formControlName="name" placeholder="Ingrese Nombre Local" type="text" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="clasificacion"></label>
+                <input id="clasificacion" name="clasificacion" formControlName="clasificacion" placeholder="Servicios-tramites-productos" type="text" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label for="descripcion"></label>
+                <input id="descripcion" name="descripcion" formControlName="descripcion" placeholder="descripcion" type="text" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="sector"></label>
+                <input id="sector" name="sector" formControlName="sector" placeholder="sector" type="text" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="telefono"></label>
+                <input id="telefono" name="telefono" formControlName="telefono" placeholder="telefono" type="text" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label for="email"></label>
+                <input id="email" name="email" formControlName="email" placeholder="Ingrese correo" type="email" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="password"></label>
+                <input id="password" name="password" formControlName="password"  placeholder="Ingrese contraseña" type="password" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="direccion"></label>
+                <input id="direccion" name="direccion" formControlName="direccion" placeholder="direccion" type="text" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="latitud"></label>
+                <input id="latitud" name="latitud" formControlName="latitud" placeholder="latitud" type="text" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="longitud"></label>
+                <input id="longitud" name="longitud" formControlName="longitud" placeholder="longitud" type="text" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="estado"></label>
+                <input id="estado" name="estado" formControlName="estado" placeholder="estado" type="text" class="form-control" />
+            </div>
+
+            <div *ngIf="!userForm.valid">
+                <div class="text-warning">
+                    *Debes llenar todos los campos
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-login mt-2" ><i class="fas fa-sign-in-alt" ></i>Enviar</button>
+           
+            
+        </form>
+        <button class="btnregresar btn btn-info btn-login mt-2" routerLink="login"><i class="fas fa-chevron-circle-left"></i>Regresar</button>
+    </div>
+    
+</div>
