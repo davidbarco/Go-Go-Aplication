@@ -13,6 +13,8 @@ api.post('/register', LocalController.create)
 api.post('/login', LocalController.login)
 api.put('/update/:id', uploadImg, LocalController.update)
 api.post('/upload-image-user/:id', uploadImg, LocalController.uploadImg)
-api.get('/get-image-user/:imgUser', LocalController.getImg)
+api.get('/get-image/:image', LocalController.getImageFile),
+api.get('/locals', LocalController.getProjects),
+api.get("/local/:id", LocalController.getProject);
 
 module.exports = api;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Local } from '../models/Local';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { GLOBAL } from './global'
 
 @Injectable({
@@ -87,4 +87,23 @@ export class LocalService {
 
     this.authenticate.next(null)
   }
+
+
+  //metodo para tomar lo que ya está en la base de datos
+  getProjects():Observable<any>{
+    let headers= new HttpHeaders().set("Content-type", "application/json");
+
+    return this.http.get(this.apiURL + "/locals", {headers: headers});
+ }
+
+ //metodo para mostrar un unico proyecto
+ getProject(id): Observable<any>{
+  let headers = new HttpHeaders().set("Content-type", "application/json");
+  return this.http.get(this.apiURL + "/local/" + id, {headers: headers});
+  
+}
+
+
+
+
 }

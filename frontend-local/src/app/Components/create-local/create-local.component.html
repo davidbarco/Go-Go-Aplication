@@ -59,6 +59,11 @@
                 <input id="estado" name="estado" formControlName="estado" placeholder="estado" type="text" class="form-control" />
             </div>
 
+            <div class="form-group">
+                <label for="image"></label>
+                <input id="image" name="image" formControlName="image" placeholder="subir imagen" type="file" class="form-control" (change)="fileChangeEvent($event)" />
+            </div>
+
             <div *ngIf="!userForm.valid">
                 <div class="text-warning">
                     *Debes llenar todos los campos

@@ -1,33 +1,17 @@
+<div class="container">
+    <h2>Locales</h2>
 
-<div class="container containerPrincipal">
-    <div class="row flex-column justify-content-center align-items-center mt-5">
-        <div class=" col-12">
-            <div class="row justify-content-center align-items-center">
-               
-                <div class="col-8">
-                    
-                </div>
-               
-            </div>
-        </div>
-        <hr />
-        <div class="informacion">
-            <h4 class="nombreSerie">{{nombreLocal}}</h4>
-            <p class="sinopsisSerie">{{image}}</p>
-            <p>{{estado}}</p>
-            
-            
-        </div>
-        <hr>
-        <div class="container col-8">
-            <div class="row">
-                
-            
-                
-            </div>
+   <ul>
+       <li *ngFor="let local of locals" class="local">
+           <a [routerLink]="['/localId', local._id]">
+            <img src="{{url+'/get-image/'+local.image }}" *ngIf="local.image" width="200px" height="200px">
+           {{local.name}} <br>
+           {{local.estado}}
+        </a>
+        </li>
 
-        </div>
-    </div>
+
+   </ul>
+
 </div>
-
 

@@ -11,21 +11,6 @@ function pruebas(req, res) {
     })
 }
 
-/* 
-    name: String,
-    clasificacion: String,
-    descripcion: String,
-    sector:String,
-    telefono:String,
-    email:String,
-    password: String,
-    direccion:String,
-    latitud:String,
-    longitud:String,
-    estado: String,
-    image: String, 
- */
-
 
 //Función para crear un usuario
 
@@ -169,17 +154,12 @@ function uploadImg(req, res) {
 
     if (req.files) {
         /* Sigue funcionando igual, capturamos la propiedad files para acceder a sus metodos, con la diferencia que como connect-multiparty genera un hash para el nombre ya no usamos la propiedad req.files.image.name para acceder al nombre porque nos daría el nombre con el que subimos (ej: "default.jpg") y necesitamos es que se guarde con el nombre hasheado, entonces accedemos al nombre por medio del path al que se subio en la carpeta de './assets/users',luego si se verifica la extensión y el procedimiento es igual, excepto que ya la imagen no se sube por acá, se sube por el archivo de routes, por medio del middleware. Revisen los console log que quedan ahi para que sepan que devuelve cada uno*/
-        console.log("req.files -->", req.files)
         const userImage = req.files.image.path
-        console.log("userImage -->", userImage)
-        const imageSplit = userImage.split('\/')
-        console.log("imageSplit -->", imageSplit)
+        const imageSplit = userImage.split('\\')
         const nameImg = imageSplit[imageSplit.length - 1]
-        console.log("nameImg -->", nameImg)
         const extImgSplit = nameImg.split('\.')
-        console.log("extImgSplit -->", extImgSplit)
         const extImg = extImgSplit[1]
-        console.log("extImg -->", extImg)
+        
 
         if (extImg == 'png' || extImg == 'jpg') {
             User.findByIdAndUpdate(userId, { image: nameImg }, (err, user) => {
@@ -202,7 +182,56 @@ function uploadImg(req, res) {
 }
 
 
-function getImg(req, res) {
+
+
+
+ //funcion para listar todos los proyectos.
+ function getProjects(req,res){
+    User.find({}).exec((err,locals)=>{
+       if(err) return res.status(500).send({message: "eror al listar proyectos"});
+       if(!locals) return res.status(404).send({message: "no encuentra el proyecto"});
+
+       return res.status(200).send({locals});
+    });
+
+
+
+ }
+
+
+
+ //metodo que nos devuelve un documento de la base de datos.
+
+ function getProject(req, res){
+         
+    var LocalsId = req.params.id;
+
+    User.findById(LocalsId, (err,local)=>{
+        if(err) return res.status(500).send({message: "error al tomar documento"});
+        if(!local) return res.status(404).send({message: "no se ha podido tomar el proyecto"});
+
+        return res.status(200).send({local});
+    });
+}
+
+
+//metodo para tomar imagen
+function getImageFile(req,res){
+
+    var file = req.params.image;
+    var path_file = "./assets/local/" + file;
+     fs.exists(path_file, (exists)=>{
+         if(exists){
+             return res.sendFile(path.resolve(path_file));
+         }else{
+             return res.status(200).send({message: "no existe la imagen"})
+         }
+     })
+
+
+}
+
+/* function getImg(req, res) {
     const imgUser = req.params.imgUser
 
     const imgRoute = `./assets/local/${imgUser}`
@@ -214,7 +243,13 @@ function getImg(req, res) {
             res.status(200).send({ message: 'No existe la imagen' })
         }
     })
-}
+} */
+
+
+
+
+
+
 
 
 
@@ -225,5 +260,7 @@ module.exports = {
     login,
     update,
     uploadImg,
-    getImg
+    getProjects,
+    getProject,
+    getImageFile
 }

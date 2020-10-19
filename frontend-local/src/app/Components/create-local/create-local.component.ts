@@ -2,21 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalService } from '../../services/local.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {UploadImgService} from "../../services/upload-img.service"
 declare var require: any
 const swal = require('sweetalert');
 
 @Component({
   selector: 'app-create-local',
   templateUrl: './create-local.component.html',
-  styleUrls: ['./create-local.component.css']
+  styleUrls: ['./create-local.component.css'],
+  providers:[UploadImgService]
 })
 export class CreateLocalComponent implements OnInit {
   
     userForm: FormGroup
+    public filesToUpload: Array<File>
   constructor(
     private formBuilder: FormBuilder,
     private userService: LocalService,
     private route: Router,
+    private _uploadImgService: UploadImgService
     
   ) {
     this.createValidator();
@@ -37,7 +41,8 @@ export class CreateLocalComponent implements OnInit {
       longitud: ['', Validators.required],
       estado: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      image: ['', Validators.required],
     })
   }
 
@@ -46,6 +51,8 @@ export class CreateLocalComponent implements OnInit {
    */
   registerUser(){
     if(this.userForm.valid){
+      
+
       this.userService.createUser(this.userForm.value).subscribe(
         (createdUser) => {
           
@@ -54,7 +61,9 @@ export class CreateLocalComponent implements OnInit {
           }else{
             swal('Registro Exítoso', "", 'success');
             
-            
+            //subir imagen
+             
+
             this.route.navigate(['/login'])
           }
         },(error) => {
@@ -64,6 +73,14 @@ export class CreateLocalComponent implements OnInit {
     }else{
       swal("Diligencia todos los campos", "", 'error');
     }
+  }
+
+
+
+  //funcion para subir imagen desde el crear local
+  fileChangeEvent(fileInput: any){
+    console.log(fileInput)
+    this.filesToUpload= <Array<File>>fileInput.target.files;
   }
 
 }

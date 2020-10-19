@@ -1,41 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalService } from '../../services/local.service';
 import {Local} from "../../models/Local";
-
-
+import {GLOBAL}from "../../services/global"
 
 
 @Component({
   selector: 'app-local-admin',
   templateUrl: './local-admin.component.html',
-  styleUrls: ['./local-admin.component.css']
+  styleUrls: ['./local-admin.component.css'],
+  providers:[LocalService]
 })
 export class LocalAdminComponent implements OnInit {
-  
-  nombreLocal
-  apiURL
-  estado
-  image 
+  public locals: Local[];
+  public url: string;
 
 
 
   constructor(
-    private localService: LocalService
+   private _LocalService: LocalService
   ) {
-    this.apiURL= this.localService.apiURL 
-    this.nombreLocal = localStorage.getItem('token')
-   
-    
-    
-    
-    
-    
-   }
+    this.url=GLOBAL.url
+  }
 
   ngOnInit(): void {
-    
-    
-    
+    this.getProjects();
+  }
+
+  getProjects(){
+    this._LocalService.getProjects().subscribe(
+       response =>{
+           if(response.locals){
+             this.locals = response.locals;
+           }
+
+       },
+       error=>{
+         console.log(<any>error)
+       }
+    );
   }
 
   
